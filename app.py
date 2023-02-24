@@ -1,41 +1,18 @@
 from flask import Flask, render_template, jsonify
+from database import load_jobs_from_db
 
 app = Flask(__name__)
-
-JOBS = [
-  {
-    'id': 1,
-    'title': 'Data Analyst',
-    'location': 'New York',
-    'salary': '1000$'
-  },
-  {
-    'id': 2,
-    'title': 'Data Scientist',
-    'location': 'Los Angeles',
-    'salary': '2000$'
-  },
-  {
-    'id': 3,
-    'title': 'Frontend Engineer',
-    'location': 'Remote',
-    'salary': '3000$'
-  },
-  {
-    'id': 4,
-    'title': 'Backend Engineer',
-    'location': 'Rome, Italy'
-  }
-]
 
 # creating a route, a part of the url after the domain name
 @app.route('/')
 def hello_world():
-  return render_template('home.html', jobs=JOBS)
+  jobs = load_jobs_from_db()
+  return render_template('home.html', jobs=jobs)
 
 @app.route('/jobs')
 def list_jobs():
-  return jsonify(JOBS)
+  jobs = load_jobs_from_db()
+  return jsonify(jobs)
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', debug=True)
