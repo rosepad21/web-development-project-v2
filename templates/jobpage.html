@@ -3,10 +3,22 @@
   <head>
     {% include 'bootstrap.html' %}
     <title>{{job.title}} - Jovian Careers</title>
+    <style>
+      #banner {
+        height: 320px;
+        width: 100%;
+        object-fit: center;
+      }
+
+      div {
+        margin: auto;
+      }
+    </style>
   </head>
   <body>
     {% include 'nav.html' %}
-    <img id='banner' class='img-responsive' src="https://web-development-project.midorukawa.repl.co/static/banner.jpg" height="240" width=auto object-fit=center>
+    <div class='container'>
+    <img id='banner' class='img-responsive' src="https://web-development-project.midorukawa.repl.co/static/banner.jpg" height="320">
     <h3>Title:</h3>
     <p>{{job.title}}</p>
     <h4>Location:</h4>
@@ -23,6 +35,8 @@
     <ul> {% for line in job.responsibilities.split('\n') %}
     <li>{{line}}</li>
     {% endfor %}</ul>
+    {% include 'application_form.html' %}
     {% include 'footer.html' %}
+    </div>
   </body>
 </html>
